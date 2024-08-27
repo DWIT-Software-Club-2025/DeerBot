@@ -11,7 +11,7 @@ class LyricsFetcher(commands.Cog):
     @commands.command()
     async def lyrics(self, ctx, *, message: str):
         genius = Genius(
-            "1HOLLpdXnmHIrsTxRP902QTolT1V3fmL-1fMZ93kOWAmJEbV1CKBR4Mc4H4nRnrWFsFaSoVLFZP3Dj2iJ46G8Q")
+            "TOKEN")
 
         song = genius.search_song(message)
         embed = discord.Embed(
