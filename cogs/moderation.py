@@ -1,10 +1,9 @@
 import discord
 from discord.ext import commands
 from discord import Guild
-del_words = ["deerhack is bad", "we hate code",
-             "i hate code", "fuck", "motherfucker", "dipan is bad"]
+del_words = []
 
-chake_hate = ["randi chake", "chake bhalu", "pragalva gay"]
+chake_hate = []
 
 
 class Moderation(commands.Cog):
