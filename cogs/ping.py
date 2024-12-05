@@ -12,6 +12,9 @@ class Ping(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print("Bot is online")
+        guild = self.bot.get_guild(1267684605461266502)
+        members = guild.member_count
+        print(members)
 
     @commands.command()
     async def ping(self, ctx):
@@ -26,7 +29,6 @@ class Ping(commands.Cog):
     @commands.command()
     async def hello(self, ctx):
         await ctx.channel.send(f"{greetings[random.randint(0, len(greetings))]} {ctx.author.mention}")
-
 
 
 async def setup(bot):
