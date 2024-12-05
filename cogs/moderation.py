@@ -1,15 +1,13 @@
 import discord
 import time
 import os
+
 from discord.ext import commands
 from discord import Guild
 from dotenv import load_dotenv
 
-
-
 load_dotenv()
 banned_words = os.getenv("del_words")
-
 
 class Moderation(commands.Cog):
     def __init__(self, bot) -> None:
