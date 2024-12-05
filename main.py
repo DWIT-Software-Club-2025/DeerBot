@@ -3,8 +3,8 @@ import os
 import asyncio
 
 from discord.ext import commands
+from discord import Client
 from dotenv import load_dotenv
-
 
 load_dotenv()
 
@@ -21,7 +21,9 @@ async def load():
 
 
 async def main():
+
     await load()
+    
     await bot.start(os.getenv("TOKEN"))
 
 

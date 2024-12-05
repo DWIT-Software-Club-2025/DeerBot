@@ -1,10 +1,13 @@
 import discord
+import time
+import os
+
 from discord.ext import commands
 from discord import Guild
-del_words = []
+from dotenv import load_dotenv
 
-chake_hate = []
-
+load_dotenv()
+banned_words = os.getenv("del_words")
 
 class Moderation(commands.Cog):
     def __init__(self, bot) -> None:
@@ -12,7 +15,7 @@ class Moderation(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, ctx):
-
+        del_words = banned_words.split(',')
         if ctx.author != self.bot.user:
             if str(ctx.content.lower()) in del_words:
                 await ctx.delete()
@@ -20,26 +23,30 @@ class Moderation(commands.Cog):
                 embed = discord.Embed(
                     title="Message Deleted 🗑️",
                     description=f"The message by {
-                        ctx.author.mention} was deleted because user is   a nigger",
+                        ctx.author.mention} was deleted because user is a L",
                     color=0xBEBEFE,
                 )
                 await ctx.channel.send(embed=embed)
 
-        if ctx.author != self.bot.user:
-            if str(ctx.content.lower()) in chake_hate:
+            if str(ctx.content.lower()).startswith("!set_reaction_role"):
+                time.sleep(1)
+                await ctx.delete()
 
-                embed = discord.Embed(
-                    title="Bravo🔥🔥",
-                    description=f"Thats the spirit {
-                        ctx.author.mention} you are a ture warrior",
-                    color=0xBEBEFE,
-                )
-                await ctx.channel.send(embed=embed)
+        # if ctx.author != self.bot.user:
+        #     if str(ctx.content.lower()) in chake_hate:
+
+        #         embed = discord.Embed(
+        #             title="Bravo🔥🔥",
+        #             description=f"Thats the spirit {
+        #                 ctx.author.mention} you are a ture warrior",
+        #             color=0xBEBEFE,
+        #         )
+        #         await ctx.channel.send(embed=embed)
 
         return
 
     @commands.command()
-    @commands.has_role("MOD")
+    @commands.has_role("Admin")
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         if reason is None:
             reason = "No reason provided"
@@ -52,7 +59,7 @@ class Moderation(commands.Cog):
         await member.ban(reason=reason)
 
     @commands.command()
-    @commands.has_role("MOD")
+    @commands.has_role("Admin")
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         guild = Guild()
         if reason is None:
